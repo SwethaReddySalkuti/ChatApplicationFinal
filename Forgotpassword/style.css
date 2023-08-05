@@ -1,0 +1,64 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background: url('chat.png');
+    background-size: cover;
+}
+
+h1{
+    justify-content: center;
+    text-align: center;
+    padding-top: 10%;
+    margin-bottom: 30px;
+    color: white;
+}
+
+form{
+    justify-content: center;
+}
+
+input{
+    display: block;
+    width: 380px;
+    height: 30px;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    background: transparent;
+    margin: 14px;
+    border-color: white;
+    color: white;
+}
+
+button{
+    font-size: 20px;
+    background-color: white;
+    color: black;
+    margin: 14px;
+    border: none;
+    width: 380px;
+    padding: 8px;
+    margin-bottom: 20%;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: yellow;
+    color: black;
+}
+
+label{
+    color: white;
+    margin: 14px;
+}
+
+small{
+    margin: 14px;
+}
