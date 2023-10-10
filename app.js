@@ -13,7 +13,7 @@ const io= socketIO(server,{ cors : { origin : '*'}});  // persistent connection 
 io.on("connection",(socket)=>{
     console.log('Socket.io Connected');
     socket.on("message",(msg,userName,groupId,userId)=>{
-        socket.broadcast.emit("message",msg,userName,groupId,userId)
+        socket.broadcast.emit("message",msg,userName,groupId,userId)       //except the one being called
     });
     socket.on("file",(message,userName,groupId,userId)=>{
         socket.broadcast.emit("file",message,userName,groupId,userId)

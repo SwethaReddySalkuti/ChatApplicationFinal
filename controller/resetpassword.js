@@ -5,7 +5,7 @@ const {createTransport} = require('nodemailer');
 const User = require('../models/user');
 const Forgotpassword = require('../models/forgotpassword');
 
-const transporter = createTransport({         // instance
+const transporter = createTransport({         // creating instance
     host:"smtp-relay.sendinblue.com",
     port:587,
     auth : {
@@ -33,8 +33,8 @@ const forgotpassword = async (req, res) => {
             const msg = {
                 to: email, //  Recipient
                 from: 'salkutiswethareddy@gmail.com', //  Sender
-                subject: 'Sending with SendGrid is Fun',
-                text: 'and easy to do anywhere, even with Node.js',
+                subject: 'Sending Password Reset Mail using SendGrid',
+                text: 'Pls reset password using below link',
                 html: `<a href="http://localhost:3000/password/resetpassword/${id}">Reset password</a>`,
             }
 
@@ -47,18 +47,16 @@ const forgotpassword = async (req, res) => {
                 }
                 else
                 {
-                    return res.status(response[0].statusCode).json({message: 'Link to reset password sent to your mail ', sucess: true})
+                    return res.status(response[0].statusCode).json({message: 'Reset password link is sent to your mail ', sucess: true})
                 }
   
                 
 
             })
-
-            //send mail
         }
         else 
         {
-            throw new Error('User doesnt exist')
+            throw new Error('User does not exist')
         }
     } catch(err){
         console.error(err)
@@ -76,7 +74,6 @@ const resetpassword = (req, res) => {
                                     <script>
                                         function formsubmitted(e){
                                             e.preventDefault();
-                                            console.log('called')
                                         }
                                     </script>
 
@@ -102,22 +99,20 @@ const updatepassword = (req, res) => {
             User.findOne({where: { id : resetpasswordrequest.userId}}).then(user => {
                 
                 if(user) {
-                    //encrypt the password
 
-                    const saltRounds = 10;
+                    const saltRounds = 5;
                     bcrypt.genSalt(saltRounds, function(err, salt) {
                         if(err){
                             console.log(err);
                             throw new Error(err);
                         }
                         bcrypt.hash(newpassword, salt, function(err, hash) {
-                            // Store hash in your password DB.
                             if(err){
                                 console.log(err);
                                 throw new Error(err);
                             }
                             user.update({ password: hash }).then(() => {
-                                res.status(201).json({message: 'Successfuly update the new password'})
+                                res.status(201).json({message: 'Successfuly updated the new password'})
                             })
                         });
                     });

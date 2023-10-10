@@ -1,5 +1,5 @@
 
-const socket = io.connect("http://localhost:3000");
+const socket = io.connect("http://localhost:3000");      //
 
 
 socket.on("message",(msg,userName,groupId,userId) =>{
@@ -46,7 +46,7 @@ socket.on("file",(message,userName,groupId,userId) => {
 //domcontent
 
 window.addEventListener('DOMContentLoaded',async()=>{
-    displayGroupLeft();
+    displayGroups();
     loadchats();
   
 })
@@ -81,7 +81,7 @@ try {
     const res=await axios.post('http://localhost:3000/groups',{groupname},{headers:{"Authorization":token}})
     console.log(res.data.msg);
     showMessageDiv(res.data.msg);
-    displayGroupLeft();
+    displayGroups();
   }
   
   if(groupname==null){
@@ -129,7 +129,7 @@ async function getAllgroups(){
 
 
 
-async function displayGroupLeft(){
+async function displayGroups(){
   try {
           const userId=parseJwt(localStorage.getItem('token')).userId;
           const groups=await getAllgroups();
@@ -287,7 +287,7 @@ async function changeAdmin(e){
       let token=localStorage.getItem('token');
       const res=await axios.patch('http://localhost:3000/groups/changeAdmin',data,{headers:{"Authorization":token}})
       showMessageDiv(res.data.msg)
-      displayGroupLeft();
+      displayGroups();
     }
     else{
       console.log("no memeber");
@@ -314,7 +314,7 @@ async function removeGroup(e){
       let token=localStorage.getItem('token');
       const res=await axios.delete(`http://localhost:3000/groups/deletegroup/${groupid}`,{headers:{"Authorization":token}})
       showMessageDiv(res.data.msg)
-      displayGroupLeft();
+      displayGroups();
     
   } catch (error) {
     console.log(error);

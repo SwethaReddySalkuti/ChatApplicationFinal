@@ -1,9 +1,6 @@
 
 const Message=require('../models/chat');
-const AWS = require('aws-sdk');
-               
-//const multer = require('multer');          //middleware      // helps in handling multiform data 
-// used whilestoring file in multer memory or disk storage       
+const AWS = require('aws-sdk');      
 
 const addMessage=async (req,res,next)=>{
     try 
@@ -41,7 +38,7 @@ const getMessages=async(req,res,next)=>{
 
 
 
-///s3upload
+//s3upload
 
 const uploadFile=async(req,res,next)=>{
   
